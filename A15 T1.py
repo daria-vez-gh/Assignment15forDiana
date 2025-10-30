@@ -2,16 +2,15 @@ def rod_cutting(n, prices):
     """
     Find the optimal way to cut a rod to maximize profit
     """
-    # Initialize DP arrays
+    # Initial DP arrays
     max_val = [0] * (n + 1)
     first_cut = [0] * (n + 1)
     
-    # Build DP table bottom-up
     for length in range(1, n + 1):
         max_value = -1
         best_cut = 0
         
-        # Try all possible first cuts
+        # All possible first cuts
         for cut in range(1, length + 1):
             # Price for cut length + optimal value for remaining length
             current_value = prices[cut - 1] + max_val[length - cut]
@@ -23,7 +22,6 @@ def rod_cutting(n, prices):
         max_val[length] = max_value
         first_cut[length] = best_cut
     
-    # Reconstruct the solution
     pieces = []
     remaining = n
     
